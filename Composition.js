@@ -8,22 +8,22 @@
 // > painter3.paints()
 // "Paints red!"
 
-const paint = function(color) {
-  const obj ={
-    paints: function() {
-      return `Paints ${color}!`
-    }
-  }
+const paint = function (color) {
+  const obj = {
+    paints: function () {
+      return `Paints ${color}!`;
+    },
+  };
   return obj;
-}
+};
 
 const painter1 = paint("green");
 const painter2 = paint("yellow");
 const painter3 = paint("red");
 
-painter1.paints()
-painter2.paints()
-painter3.paints()
+painter1.paints();
+painter2.paints();
+painter3.paints();
 
 //Problem #2
 //Compose a function called sound(). You should be able to add the following functionality to the objects listed:
@@ -35,14 +35,14 @@ painter3.paints()
 // > sleepyBear.sound()
 // "Grrr...yawn"
 
-const sound =  function(soundOfThing) {
+const sound = function (soundOfThing) {
   const obj = {
-    makeSound: function() {
-      return `${soundOfThing}`
-    }
-  }
+    makeSound: function () {
+      return `${soundOfThing}`;
+    },
+  };
   return obj;
-}
+};
 
 const faucet = sound("Drip drip drip");
 const oldCar = sound("Grumble grumble");
@@ -60,21 +60,34 @@ sleepyBear.makeSound();
 //> battleRobot1.throw();
 //"The battle robot throws the spear 100 yards at 200 miles per hour!"
 
-const throwFn = function(spear){
+const throwFn = function (robot) {
   const obj = {
-    distance: function(yards) {
-      return `The battle robot throws the spear ${yards} at ${miles} per hour!`
+    throw: function (distance) {
+      return function (speed) {
+        return `The battle ${robot} throws the spear ${distance} at ${speed} per hour!`;
+      };
     },
-    speed: function(miles) {
-      return `The battle robot throws the spear ${yards} at ${miles} per hour!`
-    }
-  }
+  };
   return obj;
-}
+};
+const robot1 = throwFn("robot1");
 
-const battleRobot1 = throw(spear);
+// const canThrow = (robot) => ({
+//   throw : function(strength){
+//     return function(height){
+//       return ${robot.name} throws the spear ${height * 10} yards at ${strength * 20} miles per hour!
+//     }
+//   }
+// });
 
-const battleRobot1 = function() {}
+// const robot = (name) => {
+//   let battleRobot = {
+//     name
+//   }
+//   return {...battleRobot, ...canThrow(battleRobot)};
+// };
+// const bigRobot = robot("Big robot");
+// console.log(superBee.throw(5)(20));
 
 // Problem #4
 //First use closures to create three dance moves. For instance, a dancer should be able to do the following:
@@ -87,23 +100,18 @@ const battleRobot1 = function() {}
 // Then add the dance moves to a dancer.
 
 function danceMove(move) {
-    return function(){
-      return `${move}`;
-    }
+  return function () {
+    return `${move}`;
+  };
 }
 
-const dancer = function(){
-  obj = {
-    samba: danceMove('The dancer sambas!'),
-    tango: danceMove('The dancer tangos!')
-  }
-  return obj;
-}
-
-> dancer.samba()
-"The dancer sambas!"
-> dancer.tango()
-"The dancer tangos!"
-
-
-
+const dancer =
+  function () {
+    obj = {
+      samba: danceMove("The dancer sambas!"),
+      tango: danceMove("The dancer tangos!"),
+    };
+    return obj;
+  } > dancer.samba();
+"The dancer sambas!" > dancer.tango();
+("The dancer tangos!");
